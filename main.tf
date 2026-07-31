@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-3"
+  region = "us-east-1"
 }
 
 variable "instance_name" {
@@ -46,7 +46,7 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "web_server" {
-  ami                    = "ami-0b4c0d9eb868d7022"
+  ami                    = "ami-08bc385c9fc5afc94"
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 
