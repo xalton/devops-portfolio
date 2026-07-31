@@ -3,29 +3,29 @@ provider "aws" {
 }
 
 variable "instance_name" {
-  description = "Nom de la VM"
+  description = "VM name"
   type        = string
   default     = "portfolio-instagram-tracker"
 }
 
 variable "instance_type" {
-  description = "Type d'instance EC2"
+  description = "EC2 instance type"
   type        = string
   default     = "t2.micro"
 }
 
 variable "my_ip" {
-  description = "Mon IP publique, pour restreindre l'accès SSH"
+  description = "My public IP, to restrict SSH access"
   type        = string
   default     = "81.243.28.211/32"
 }
 
 resource "aws_security_group" "allow_ssh" {
   name        = "allow-ssh-from-me"
-  description = "Autorise uniquement SSH depuis mon IP publique"
+  description = "Allow SSH only from my public IP"
 
   ingress {
-    description = "SSH depuis mon IP"
+    description = "SSH from my IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -33,7 +33,7 @@ resource "aws_security_group" "allow_ssh" {
   }
 
   egress {
-    description = "Tout le trafic sortant autorisé"
+    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -56,6 +56,6 @@ resource "aws_instance" "web_server" {
 }
 
 output "instance_public_ip" {
-  description = "Adresse IP publique de la VM"
+  description = "Public IP address of the VM"
   value       = aws_instance.web_server.public_ip
 }
